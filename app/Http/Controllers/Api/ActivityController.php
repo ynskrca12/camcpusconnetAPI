@@ -73,9 +73,7 @@ class ActivityController extends Controller
     
     public function update(EditActivityRequest $request, Activity $activity){
 
-
-    try{
-        
+    try{        
      
         $activity->name=$request->name;
         $activity->description=$request->description;
@@ -92,7 +90,6 @@ class ActivityController extends Controller
     catch (Exception $e) {
         return response()->json($e);
     }
-
 
     }//End Method
 
