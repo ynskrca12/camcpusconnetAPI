@@ -20,9 +20,9 @@ class ActivityController extends Controller
             $search = $request->input('search');
     
     
-            if($request){
-                $query->whereRaw("name LIKE '%" . $search . "%'");
-            }
+            // if($request){
+            //     $query->whereRaw("title LIKE '%" . $search . "%'");
+            // }
             
             $total = $query->count();
             $result = $query->offset(($page - 1) * $perPage)->limit($perPage)->get();
@@ -53,10 +53,10 @@ class ActivityController extends Controller
 
         $activity = new Activity();
 
-        $activity->name=$request->name;
-        $activity->description=$request->description;
+        $activity->title=$request->title;
+        $activity->advertDesc=$request->advertDesc;
         $activity->category=$request->category;
-        $activity->imagePath=$fileName;
+        $activity->imageUrl=$fileName;
         $activity->save();
 
         return response()->json([
@@ -75,8 +75,8 @@ class ActivityController extends Controller
 
     try{        
      
-        $activity->name=$request->name;
-        $activity->description=$request->description;
+        $activity->title=$request->title;
+        $activity->advertDesc=$request->advertDesc;
         $activity->category=$request->category;
     
         $activity->save();

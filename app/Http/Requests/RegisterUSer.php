@@ -6,8 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
-
-class EditAdvertRequest extends FormRequest
+class RegisterUSer extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,17 @@ class EditAdvertRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required'
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+
         ];
     }
 
     public function failedValidation(ValidationValidator $validator){
         throw new HttpResponseException(response()->json([
             'success' => false,
+            'status_code' => 422,
             'error' => true,
             'message' =>'Validasyon hatası',
             'errorsList' =>$validator->errors()
@@ -41,7 +44,10 @@ class EditAdvertRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Başlık alanı boş geçilemez.'
+            'name.required' => 'İsim alanı boş geçilemez.',
+            'email.required' => 'E-mail alanı boş geçilemez.',
+            'name.unique' => 'Bu email kullanılıyor.',
+            'password.required' => 'Şifre alanı boş bırakılamaz.',
         ];
     }
 }

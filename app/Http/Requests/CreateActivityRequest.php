@@ -25,7 +25,7 @@ class CreateActivityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required'
+            'title' => 'required'
         ];
     }
 
@@ -41,7 +41,7 @@ class CreateActivityRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'İsim alanı boş geçilemez.'
+            'title.required' => 'Başlık alanı boş geçilemez.'
         ];
     }
 }

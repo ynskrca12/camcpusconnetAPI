@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
+
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
-
-class EditAdvertRequest extends FormRequest
+class CreatePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class EditAdvertRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required'
+            'postText' => 'required'
         ];
     }
 
@@ -41,7 +41,7 @@ class EditAdvertRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Başlık alanı boş geçilemez.'
+            'postText.required' => 'Post açıklaması alanı boş geçilemez.'
         ];
     }
 }

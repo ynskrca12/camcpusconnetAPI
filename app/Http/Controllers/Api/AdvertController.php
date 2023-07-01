@@ -21,7 +21,7 @@ class AdvertController extends Controller
     
     
             if($request){
-                $query->whereRaw("name LIKE '%" . $search . "%'");
+                $query->whereRaw("title LIKE '%" . $search . "%'");
             }
             
             $total = $query->count();
@@ -47,16 +47,16 @@ class AdvertController extends Controller
 
         
       try{
-        // $file = $request->file('file');
-        // $fileName = $file->getClientOriginalName();
-        // $file->move(public_path('uploads'), $fileName);
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $fileName);
 
         $advert = new Advert();
 
-        $advert->name=$request->name;
-        $advert->description=$request->description;
+        $advert->title=$request->title;
+        $advert->advertDesc=$request->descripadvertDescion;
         $advert->category=$request->category;
-       // $advert->imagePath=$fileName;
+        $advert->imageUrl=$fileName;
         $advert->save();
 
         return response()->json([
@@ -75,8 +75,8 @@ class AdvertController extends Controller
 
     try{        
      
-        $advert->name=$request->name;
-        $advert->description=$request->description;
+        $advert->title=$request->title;
+        $advert->advertDesc=$request->advertDesc;
         $advert->category=$request->category;
     
         $advert->save();

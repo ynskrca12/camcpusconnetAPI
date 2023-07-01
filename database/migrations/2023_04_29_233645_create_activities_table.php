@@ -10,10 +10,11 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->longText('description')->nullable();
+            $table->string('title');
+            $table->longText('activityDesc')->nullable();
             $table->string('category')->nullable();
-            $table->string('imagePath')->nullable();
+            $table->string('imageUrl')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

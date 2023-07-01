@@ -6,8 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
-
-class EditAdvertRequest extends FormRequest
+class EditPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +21,11 @@ class EditAdvertRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+
     public function rules(): array
     {
         return [
-            'title' => 'required'
+            'postText' => 'required'
         ];
     }
 
@@ -41,7 +41,7 @@ class EditAdvertRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Başlık alanı boş geçilemez.'
+            'postText.required' => 'İsim alanı boş geçilemez.'
         ];
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
+
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 
-
-class CreateUniversityRequest extends FormRequest
+class CreateAnnouncementRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class CreateUniversityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required'
+            'title' => 'required'
         ];
     }
 
@@ -41,7 +41,7 @@ class CreateUniversityRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'İsim alanı boş geçilemez.'
+            'title.required' => 'Başlık alanı boş geçilemez.'
         ];
     }
 }

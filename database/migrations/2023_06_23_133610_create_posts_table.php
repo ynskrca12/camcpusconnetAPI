@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('adverts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('advertDesc')->nullable();
-            $table->string('category')->nullable();
+            $table->string('author');
+            $table->string('authorAvatar')->nullable();
             $table->string('imageUrl')->nullable();
-            $table->string('address')->nullable();
-            $table->integer('price')->nullable();
+            $table->longText('postText');
+            $table->integer('postLike')->nullable();
+            $table->string('postComment')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('adverts');
+        Schema::dropIfExists('posts');
     }
 };
