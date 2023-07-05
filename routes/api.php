@@ -9,11 +9,6 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('activities',[ActivityController::class,'index']);
-Route::post('activities/create',[ActivityController::class,'store']);
-Route::put('activities/edit{activity}',[ActivityController::class,'update']);
-Route::delete('activities/{activity}',[ActivityController::class,'delete']);
-
 Route::get('announcements',[AnnouncementController::class,'index']);
 Route::post('announcement/create',[AnnouncementController::class,'store']);
 Route::put('announcement/edit{announcement}',[AnnouncementController::class,'update']);

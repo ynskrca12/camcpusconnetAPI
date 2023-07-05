@@ -33,8 +33,8 @@ class PostController extends Controller
           $post = new Post();
   
           $post->postText=$request->postText;
-          $post->imageUrl=$fileName;
-          $post->author=$request->author;
+          $post->postImages=$fileName;
+          $post->authorName=$request->authorName;
           $post->save();
   
           return response()->json([
@@ -55,7 +55,7 @@ class PostController extends Controller
         try{        
          
             $post->postText=$request->postText;
-            $post->author=$request->author;
+            $post->authorName=$request->author;
 
             $post->save();
     

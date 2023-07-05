@@ -6,15 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('activities', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('activityDesc')->nullable();
-            $table->string('category')->nullable();
-            $table->string('imageUrl')->nullable();
-            $table->string('address')->nullable();
+            $table->integer('advertId');
+            $table->string('message');
+            $table->string('date');
+            $table->string('receiverEmail');
+            $table->string('senderEmail');
+
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activities');
+        Schema::dropIfExists('messages');
     }
 };
