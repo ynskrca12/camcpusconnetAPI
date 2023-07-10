@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('author');
-            $table->string('authorAvatar')->nullable();
-            $table->string('imageUrl')->nullable();
+            $table->string('authorName');
+            $table->string('email')->nullable();
+            $table->mediumText('postImages')->nullable();
             $table->longText('postText');
-            $table->integer('postLike')->nullable();
-            $table->string('postComment')->nullable();
             $table->timestamps();
         });
     }

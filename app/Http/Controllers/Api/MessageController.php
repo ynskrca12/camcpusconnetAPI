@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreatePostRequest;
-use App\Http\Requests\EditPostRequest;
-use App\Models\Post;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -16,32 +14,32 @@ class PostController extends Controller
 
         return response()->json([
             'status_code' => 200,
-            'status_message' => 'Postlar başarıyla listelendi.',
-            'data' =>Post::all()
+            'status_message' => 'Mesajlar başarıyla listelendi.',
+            'data' =>Message::all()
         ]);
     }
 
 
-    public function store(CreatePostRequest $request){
+    public function store(Request $request){
 
         
         try{
-          $file = $request->file('file');
-          $fileName = $file->getClientOriginalName();
-          $file->move(public_path('uploads'), $fileName);
+       
   
-          $post = new Post();
+          $message = new Message();
 
-          $post->email=$request->email;
-          $post->postText=$request->postText;
-          $post->postImages=$fileName;
-          $post->authorName=$request->authorName;
-          $post->save();
+          $message->advertId=$request->advertId;
+          $message->message=$request->message;
+          $message->date=$request->date;
+          $message->receiverEmail=$request->receiverEmail;
+          $message->senderEmail=$request->senderEmail;
+
+          $message->save();
   
           return response()->json([
               'status_code' => 200,
               'status_message' => 'Post başarıyla kaydedildi.',
-              'data' =>$post
+              'data' =>$message
           ]);
         }
         catch (Exception $e){
@@ -51,19 +49,22 @@ class PostController extends Controller
       } //End Method
 
 
-      public function update(EditPostRequest $request, Post $post){
+      public function update(Request $request, Message $message){
 
         try{        
          
-            $post->email=$request->email;
-            $post->postText=$request->postText;
-            $post->authorName=$request->authorName;
-            $post->save();
+            $message->advertId=$request->advertId;
+            $message->message=$request->message;
+            $message->date=$request->date;
+            $message->receiverEmail=$request->receiverEmail;
+            $message->senderEmail=$request->senderEmail;
+            
+            $message->save();
     
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Post başarıyla güncellendi.',
-                'data' =>$post
+                'data' =>$message
             ]);
         }
         catch (Exception $e) {
@@ -72,15 +73,15 @@ class PostController extends Controller
     
         }//End Method
         
-        public function delete(Post $post){
+        public function delete(Message $message){
             try {
-                if($post){
-                    $post->delete();
+                if($message){
+                    $message->delete();
     
                 return response()->json([
                     'status_code' => 200,
-                    'status_message' => 'Post başarıyla silindi.',
-                    'data' =>$post
+                    'status_message' => 'Mesaj başarıyla silindi.',
+                    'data' =>$message
                 ]);
                 }else{
     

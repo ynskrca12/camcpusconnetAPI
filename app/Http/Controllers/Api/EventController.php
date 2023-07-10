@@ -16,7 +16,7 @@ class AnnouncementController extends Controller
 
         return response()->json([
             'status_code' => 200,
-            'status_message' => 'Üniversiteler başarıyla listelendi.',
+            'status_message' => 'Eventler başarıyla listelendi.',
             'data' =>Event::all()
         ]);
     }
@@ -32,10 +32,12 @@ class AnnouncementController extends Controller
   
           $event = new Event();
   
-          $event->eventDesc=$request->eventDesc;
-          $event->imageUrl=$fileName;
+          $event->description=$request->description;
+          $event->date=$request->date;
+          $event->images=$fileName;
           $event->title=$request->title;
-          $event->category=$request->category;
+          $event->email=$request->email;
+          $event->university=$request->university;
           $event->save();
   
           return response()->json([
@@ -55,9 +57,11 @@ class AnnouncementController extends Controller
 
         try{        
          
+            $event->description=$request->description;
+            $event->date=$request->date;
             $event->title=$request->title;
-            $event->eventDesc=$request->eventDesc;
-            $event->category=$request->category;
+            $event->email=$request->email;
+            $event->university=$request->university;
         
             $event->save();
     

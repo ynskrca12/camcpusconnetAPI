@@ -26,16 +26,16 @@ class NewsController extends Controller
 
         
         try{
-        //   $file = $request->file('file');
-        //   $fileName = $file->getClientOriginalName();
-        //   $file->move(public_path('uploads'), $fileName);
+           $file = $request->file('file');
+          $fileName = $file->getClientOriginalName();
+           $file->move(public_path('uploads'), $fileName);
   
           $news = new News();
   
-          $news->newsDesc=$request->newsDesc;
-          //$news->imageUrl=$fileName;
-          $news->title=$request->title;
-          $news->category=$request->category;
+          $news->description=$request->description;
+          $news->images=$fileName;
+          $news->university=$request->university;
+          $news->date=$request->date;
           $news->save();
   
           return response()->json([
@@ -51,20 +51,20 @@ class NewsController extends Controller
       } //End Method
 
 
-      public function update(EditNewsRequest $request, News $event){
+      public function update(EditNewsRequest $request, News $news){
 
         try{        
          
-            $event->title=$request->title;
-            $event->newsDesc=$request->newsDesc;
-            $event->category=$request->category;
+          $news->description=$request->description;        
+          $news->university=$request->university;
+          $news->date=$request->date;
         
-            $event->save();
+            $news->save();
     
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'Haberler başarıyla güncellendi.',
-                'data' =>$event
+                'data' =>$news
             ]);
         }
         catch (Exception $e) {

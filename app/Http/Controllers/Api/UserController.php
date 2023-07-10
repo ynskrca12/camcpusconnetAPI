@@ -41,26 +41,32 @@ class UserController extends Controller
 
     }//end method
 
-    public function login(LogUser $request){
-
-        if(auth()->attempt($request->only(['email','password']))){
-
+    public function login(LogUser $request)
+    {
+        if (auth()->attempt($request->only(['email', 'password']))) {
             $user = auth()->user();
-            $token = $user->createToken('MA_CLE_SECRETE_VISIBLE_UNIQUEMENT_AU_BACKEND')
-                ->plainTextToken;
 
-                return response()->json([
-                    'status_code' => 200,
-                    'status_message' => 'Giriş yapıldı.',
-                    'user' => $user,
-                    'token' =>$token
-                ]);    
-        }else{
-           
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => 'Giriş yapıldı.',
+                'user' => $user,
+            ]);
+        } else {
             return response()->json([
                 'status_code' => 403,
-                'status_message' => 'Bilgi bulunamadı.',
+                'status_message' => 'Bilgiler geçersiz.',
             ]);
         }
-    }//End Method
+    }
+
+    public function getAllUsers()
+    {
+        $users = User::all();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Tüm kullanıcılar alındı.',
+            'users' => $users,
+        ]);
+    }
 }

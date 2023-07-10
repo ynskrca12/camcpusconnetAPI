@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->integer('advertId');
+            $table->integer('advertId')->nullable();
             $table->string('message');
-            $table->string('date');
-            $table->string('receiverEmail');
-            $table->string('senderEmail');
-
+            $table->string('date')->nullable();
+            $table->string('receiverEmail')->nullable();
+            $table->string('senderEmail')->nullable();
             $table->timestamps();
         });
     }

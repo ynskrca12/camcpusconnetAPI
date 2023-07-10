@@ -11,36 +11,13 @@ use Illuminate\Http\Request;
 
 class AdvertController extends Controller
 {
-    public function index(Request $request){
-
-        try {
-            $query = Advert::query();
-            $perPage =1;
-            $page = $request->input('page',1);
-            $search = $request->input('search');
-    
-    
-            if($request){
-                $query->whereRaw("title LIKE '%" . $search . "%'");
-            }
-            
-            $total = $query->count();
-            $result = $query->offset(($page - 1) * $perPage)->limit($perPage)->get();
+    public function index(Request $request){       
 
             return response()->json([
                 'status_code' => 200,
-                'status_message' => 'İlanlar başarıyla listelendi.',
-                'current_page' => $page,
-                'last_page' => ceil($total / $perPage),
-                'items' => $result
+                'status_message' => 'Advert başarıyla listelendi.',
+                'data' =>Advert::all()
             ]);
-
-        } catch (Exception $e) {
-            return response()->json($e);
-        }
-
-
-
     }//End Method
 
     public function store(CreateAdvertRequest $request){
@@ -54,9 +31,15 @@ class AdvertController extends Controller
         $advert = new Advert();
 
         $advert->title=$request->title;
-        $advert->advertDesc=$request->descripadvertDescion;
+        $advert->email=$request->email;
+        $advert->name=$request->name;
+        $advert->description=$request->description;
         $advert->category=$request->category;
-        $advert->imageUrl=$fileName;
+        $advert->university=$request->university;
+        $advert->images=$fileName;
+        $advert->address=$request->address;
+        $advert->price=$request->price;
+        $advert->date=$request->date;
         $advert->save();
 
         return response()->json([
@@ -76,8 +59,14 @@ class AdvertController extends Controller
     try{        
      
         $advert->title=$request->title;
-        $advert->advertDesc=$request->advertDesc;
+        $advert->email=$request->email;
+        $advert->name=$request->name;
+        $advert->description=$request->description;
         $advert->category=$request->category;
+        $advert->university=$request->university;
+        $advert->address=$request->address;
+        $advert->price=$request->price;
+        $advert->date=$request->date;
     
         $advert->save();
 

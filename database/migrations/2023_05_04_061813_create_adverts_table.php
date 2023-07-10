@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('adverts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('advertDesc')->nullable();
+            $table->string('email')->nullable();
+            $table->string('name')->nullable();
+            $table->longText('description')->nullable();
             $table->string('category')->nullable();
-            $table->string('imageUrl')->nullable();
+            $table->string('university')->nullable();
+            $table->mediumText('images')->nullable();
             $table->string('address')->nullable();
             $table->integer('price')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
